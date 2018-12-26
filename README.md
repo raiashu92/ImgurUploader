@@ -2,7 +2,7 @@
 
 To start this service, execute the below command:
 
-mvn spring-boot:run
+    mvn spring-boot:run
 
 ## SHOW ALL UPLOADED
 The base link to show url's of all images successfully uploaded to imgur: http://localhost:8080/v1/images  (GET)
@@ -12,13 +12,17 @@ POST request
 http://localhost:8080/v1/images/upload
 
 request body
+```json
 {
     "urls":[
             "http://www.google.com"
     ]
 }
+```
 
 response body
+```json
 {
     "jobId" : "1"
 }
+```
