@@ -1,8 +1,9 @@
 package com.akr.leadIq.service;
 
-import com.akr.leadIq.datastore.DatabaseMap;
 import com.akr.leadIq.datastore.JobUrlLists;
 import com.akr.leadIq.exception.UploadException;
+import com.akr.leadIq.utility.CustomResponseHandler;
+import com.akr.leadIq.utility.ResponseObject;
 import com.akr.leadIq.utility.TimeZone;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
@@ -11,12 +12,10 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
-import com.akr.leadIq.utility.CustomResponseHandler;
-import com.akr.leadIq.utility.ResponseObject;
+import org.apache.log4j.Logger;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +26,7 @@ import java.util.List;
 * */
 
 public class UploadService {
+    private static final Logger LOGGER = Logger.getLogger(UploadService.class);
     public static final String CLIENT_ID = "6c5dfa87e16af0c";
     public static final String IMGUR_URL = "https://api.imgur.com/3/image";
     JobUrlLists jobUrlLists;
@@ -52,8 +52,8 @@ public class UploadService {
         try {
             httpPostRequest.setEntity(new UrlEncodedFormEntity(params));
             ResponseObject responseBody = (ResponseObject) httpClient.execute(httpPostRequest, customResponseHandler);
-            System.out.println(Thread.currentThread().toString() + "----------------------------------------");
-            System.out.println(Thread.currentThread().toString() + " : " + responseBody);
+            LOGGER.info("----------------------------------------");
+            LOGGER.info(responseBody);
 
             status = responseBody.getStatusCode();
             if(status>=200 && status<300){
@@ -64,11 +64,11 @@ public class UploadService {
                     jobUrlLists.setFinished(dateTime.getTimeNow());
                     jobUrlLists.setStatus("processed");
                 }
-                System.out.println("Adding the link to completed");
+                LOGGER.info("Adding the imgur link for " + imageLink + " to completed list.");
             } else {
                 jobUrlLists.getPending().remove(imageLink);
                 jobUrlLists.getFailed().add(imageLink);
-                System.out.println("Adding the link to failed");
+                LOGGER.info("Adding the link " + imageLink + " to failed list");
             }
 
             httpClient.close();

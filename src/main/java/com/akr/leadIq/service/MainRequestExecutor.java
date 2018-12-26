@@ -2,11 +2,11 @@ package com.akr.leadIq.service;
 
 import com.akr.leadIq.datastore.JobUrlLists;
 import com.akr.leadIq.utility.URLToBase64;
+import org.apache.log4j.Logger;
 
-import java.util.List;
+
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
 /*
 * Main executor class, responsible for creating executor service
@@ -14,6 +14,7 @@ import java.util.concurrent.TimeUnit;
 * */
 
 public class MainRequestExecutor {
+    private static final Logger LOGGER = Logger.getLogger(MainRequestExecutor.class);
     public static final int NUMBER_OF_THREADS = 4;
     URLToBase64 urlToBase64;
     UploadService uploadService;
@@ -27,6 +28,7 @@ public class MainRequestExecutor {
     }
 
     public void mainExecutor() {
+        LOGGER.info("Starting the executor service now with " + NUMBER_OF_THREADS + " threads ...");
         ExecutorService execService = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
 
         for (String link : jobUrlLists.getPending()){

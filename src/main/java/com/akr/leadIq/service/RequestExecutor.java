@@ -3,6 +3,7 @@ package com.akr.leadIq.service;
 import com.akr.leadIq.datastore.JobUrlLists;
 import com.akr.leadIq.exception.UploadException;
 import com.akr.leadIq.utility.URLToBase64;
+import org.apache.log4j.Logger;
 
 /*
 * Thread's request executor class, defines what
@@ -10,6 +11,7 @@ import com.akr.leadIq.utility.URLToBase64;
 * */
 
 public class RequestExecutor implements Runnable{
+    private static final Logger LOGGER = Logger.getLogger(RequestExecutor.class);
     private String imageLink;
     URLToBase64 urlToBase64;
     UploadService uploadService;
@@ -34,8 +36,8 @@ public class RequestExecutor implements Runnable{
             JobUrlLists jobUrlLists = uploadService.getJobUrlLists();
             jobUrlLists.getPending().remove(imageLink);
             jobUrlLists.getFailed().add(imageLink);
-            System.out.println("Adding the link to failed in reqExec");
-            System.out.println("**[ERROR]** encountered following error: " + e.getStatus());
+            LOGGER.error("Adding the link " + imageLink +" to failed list");
+            LOGGER.error("**[ERROR]** encountered following error: " + e.getStatus());
         }
 
     }
