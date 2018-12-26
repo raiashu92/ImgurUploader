@@ -1,7 +1,13 @@
 package com.akr.leadIq.service;
 
 import com.akr.leadIq.datastore.JobUrlLists;
+import com.akr.leadIq.exception.UploadException;
 import com.akr.leadIq.utility.URLToBase64;
+
+/*
+* Thread's request executor class, defines what
+* processes are to be done in each thread.
+* */
 
 public class RequestExecutor implements Runnable{
     private String imageLink;
@@ -16,14 +22,21 @@ public class RequestExecutor implements Runnable{
 
     @Override
     public void run() {
-        //download image and convert to Base64 string
-        String base64String = urlToBase64.getBase64String(imageLink);
-        //System.out.println(Thread.currentThread().toString() + ": got base64 string: " + base64String);
 
-        //upload the image to imgur using the provided base 64 string
-        uploadService.uploadImage(base64String, imageLink);
+        try {
+            //download the image from provided URL and convert to Base64 string
+            String base64String = urlToBase64.getBase64String(imageLink);
 
-        //System.out.println(Thread.currentThread().toString() + "lists list" + jobUrlLists);
+            //upload the image to imgur using the provided base 64 string
+            uploadService.uploadImage(base64String, imageLink);
+        } catch (UploadException e) {
+            //move the pending urls to failed list
+            JobUrlLists jobUrlLists = uploadService.getJobUrlLists();
+            jobUrlLists.getPending().remove(imageLink);
+            jobUrlLists.getFailed().add(imageLink);
+            System.out.println("Adding the link to failed in reqExec");
+            System.out.println("**[ERROR]** encountered following error: " + e.getStatus());
+        }
 
     }
 }

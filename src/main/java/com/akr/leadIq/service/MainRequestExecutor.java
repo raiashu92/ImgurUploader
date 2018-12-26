@@ -8,6 +8,11 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
+/*
+* Main executor class, responsible for creating executor service
+* and delegating tasks.
+* */
+
 public class MainRequestExecutor {
     public static final int NUMBER_OF_THREADS = 4;
     URLToBase64 urlToBase64;
@@ -31,6 +36,7 @@ public class MainRequestExecutor {
 
 
         execService.shutdown();
+        //forced termination not required
         /*try {
             if (!execService.awaitTermination(25000L, TimeUnit.MILLISECONDS)) {
                 System.out.println("ExecutorService didn't terminate in the specified time.");

@@ -2,6 +2,7 @@ package com.akr.leadIq.service;
 
 import com.akr.leadIq.datastore.DatabaseMap;
 import com.akr.leadIq.datastore.JobUrlLists;
+import com.akr.leadIq.exception.UploadException;
 import com.akr.leadIq.utility.TimeZone;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
@@ -15,8 +16,15 @@ import com.akr.leadIq.utility.ResponseObject;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
+
+/*
+* Connects to imgur api to upload the provided Base64 string.
+* Based on the response the respective lists- uploaded, failed,
+* completed are updated.
+* */
 
 public class UploadService {
     public static final String CLIENT_ID = "6c5dfa87e16af0c";
@@ -27,7 +35,11 @@ public class UploadService {
         this.jobUrlLists = jobUrlLists;
     }
 
-    public void uploadImage(String base64String, String imageLink){
+    public JobUrlLists getJobUrlLists() {
+        return jobUrlLists;
+    }
+
+    public void uploadImage(String base64String, String imageLink) throws UploadException {
 
         CloseableHttpClient httpClient = HttpClients.createDefault();
         HttpPost httpPostRequest = new HttpPost(IMGUR_URL);
@@ -36,14 +48,14 @@ public class UploadService {
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("image", base64String));
         CustomResponseHandler customResponseHandler = new CustomResponseHandler();
-
+        int status = -1;
         try {
             httpPostRequest.setEntity(new UrlEncodedFormEntity(params));
             ResponseObject responseBody = (ResponseObject) httpClient.execute(httpPostRequest, customResponseHandler);
             System.out.println(Thread.currentThread().toString() + "----------------------------------------");
             System.out.println(Thread.currentThread().toString() + " : " + responseBody);
 
-            int status = responseBody.getStatusCode();
+            status = responseBody.getStatusCode();
             if(status>=200 && status<300){
                 jobUrlLists.getPending().remove(imageLink);
                 jobUrlLists.getCompleted().add(responseBody.getLink());
@@ -61,11 +73,11 @@ public class UploadService {
 
             httpClient.close();
         } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
+            throw new UploadException(e, status);
         } catch (ClientProtocolException e) {
-            e.printStackTrace();
+            throw new UploadException(e, status);
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new UploadException(e, status);
         }
 
     }
