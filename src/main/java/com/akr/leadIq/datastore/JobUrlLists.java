@@ -2,6 +2,11 @@ package com.akr.leadIq.datastore;
 
 import java.util.concurrent.CopyOnWriteArrayList;
 
+/*
+* Store the state of each job alongwith
+* other relevant fields.
+* */
+
 public class JobUrlLists {
     String id;
     String created;

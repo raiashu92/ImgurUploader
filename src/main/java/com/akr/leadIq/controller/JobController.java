@@ -13,6 +13,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
+/*
+* controller class for our REST service.
+* Supports 2 GET and 1 PUT operations
+* */
+
 @RestController
 @RequestMapping(value = "/v1/images", produces = "application/json")
 public class JobController {
