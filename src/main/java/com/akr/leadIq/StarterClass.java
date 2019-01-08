@@ -22,6 +22,7 @@ public class StarterClass {
         threadExec.setCorePoolSize(4);
         threadExec.setMaxPoolSize(6);
         threadExec.setThreadNamePrefix("ImgurREST-");
+        threadExec.setQueueCapacity(200);
         threadExec.initialize();
         return threadExec;
     }
