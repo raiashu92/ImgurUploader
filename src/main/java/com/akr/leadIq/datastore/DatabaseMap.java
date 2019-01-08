@@ -43,6 +43,7 @@ public class DatabaseMap {
         validExt.add("tif");
         validExt.add("jpg");
         validExt.add("bmp");
+        validExt.add("jpeg");
     }
 
     public JobUrlLists create(UrlObject urlObject){

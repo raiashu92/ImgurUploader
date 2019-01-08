@@ -52,7 +52,7 @@ public class UploadService {
         try {
             httpPostRequest.setEntity(new UrlEncodedFormEntity(params));
             ResponseObject responseBody = (ResponseObject) httpClient.execute(httpPostRequest, customResponseHandler);
-            LOGGER.info("----------------------------------------");
+            //LOGGER.info("----------------------------------------");
             LOGGER.info(responseBody);
 
             status = responseBody.getStatusCode();

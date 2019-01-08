@@ -1,17 +1,18 @@
 package com.akr.leadIq.controller;
 
 import com.akr.leadIq.datastore.DatabaseMap;
-import com.akr.leadIq.datastore.JobUrlLists;
 import com.akr.leadIq.domain.JobIdObject;
 import com.akr.leadIq.domain.JobStatusObject;
 import com.akr.leadIq.domain.UrlObject;
-import com.akr.leadIq.service.MainRequestExecutor;
+import com.akr.leadIq.service.UrlUploadRequestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 /*
 * controller class for our REST service.
@@ -25,16 +26,20 @@ public class JobController {
     @Autowired
     private DatabaseMap databaseMap;
 
+    @Autowired
+    private UrlUploadRequestService asyncRequestService;
+
     @RequestMapping(value = "/upload", method = RequestMethod.POST, consumes = "application/json")
     public ResponseEntity<JobIdObject> uploadJob(@RequestBody UrlObject urlObject){
-        JobUrlLists jobUrlLists = databaseMap.create(urlObject);
-        JobIdObject jobId = new JobIdObject();
-        jobId.setJobId(jobUrlLists.getId());
 
-        MainRequestExecutor mainRequestExecutor = new MainRequestExecutor(jobUrlLists);
-        mainRequestExecutor.mainExecutor();
-
-        return new ResponseEntity<>(jobId, HttpStatus.CREATED);
+        CompletableFuture<JobIdObject> responseJobId = asyncRequestService.getJobIdForUrl(urlObject);
+        try {
+            return new ResponseEntity<>(responseJobId.get(), HttpStatus.CREATED);
+        } catch (InterruptedException e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        } catch (ExecutionException e) {
+            return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
+        }
     }
 
     @RequestMapping(value = "/upload/{jobId}", method = RequestMethod.GET)
