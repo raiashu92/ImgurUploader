@@ -15,29 +15,29 @@ import java.util.concurrent.Executors;
 
 public class MainRequestExecutor {
     private static final Logger LOGGER = Logger.getLogger(MainRequestExecutor.class);
-    public static final int NUMBER_OF_THREADS = 4;
     URLToBase64 urlToBase64;
     UploadService uploadService;
     JobUrlLists jobUrlLists;
+    ExecutorService execService;
 
-    public MainRequestExecutor(JobUrlLists jobUrlLists) {
+    public MainRequestExecutor(ExecutorService execService) {
         this.urlToBase64 = new URLToBase64();
+        this.execService = execService;
+    }
+
+    public void mainExecutor(JobUrlLists jobUrlLists) {
         this.jobUrlLists = jobUrlLists;
         this.uploadService = new UploadService(jobUrlLists);
 
-    }
 
-    public void mainExecutor() {
-        LOGGER.info("Starting the executor service now with " + NUMBER_OF_THREADS + " threads ...");
-        ExecutorService execService = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
 
         for (String link : jobUrlLists.getPending()){
             RequestExecutor reqExec = new RequestExecutor(link, urlToBase64, uploadService);
             execService.submit(reqExec);
         }
 
-
-        execService.shutdown();
+        //shutdown logic moved to controller level
+        //execService.shutdown();
         //forced termination not required
         /*try {
             if (!execService.awaitTermination(25000L, TimeUnit.MILLISECONDS)) {
