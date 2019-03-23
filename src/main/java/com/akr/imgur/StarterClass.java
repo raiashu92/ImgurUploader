@@ -1,4 +1,4 @@
-package com.akr.leadIq;
+package com.akr.imgur;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

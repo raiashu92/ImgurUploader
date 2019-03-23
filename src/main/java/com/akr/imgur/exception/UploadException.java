@@ -1,4 +1,4 @@
-package com.akr.leadIq.exception;
+package com.akr.imgur.exception;
 
 /*
 * Custom exception class to handle failure when our upload job fails

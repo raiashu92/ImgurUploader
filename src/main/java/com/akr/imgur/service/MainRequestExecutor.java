@@ -1,12 +1,11 @@
-package com.akr.leadIq.service;
+package com.akr.imgur.service;
 
-import com.akr.leadIq.datastore.JobUrlLists;
-import com.akr.leadIq.utility.URLToBase64;
+import com.akr.imgur.datastore.JobUrlLists;
+import com.akr.imgur.utility.URLToBase64;
 import org.apache.log4j.Logger;
 
 
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 /*
 * Main executor class, responsible for creating executor service

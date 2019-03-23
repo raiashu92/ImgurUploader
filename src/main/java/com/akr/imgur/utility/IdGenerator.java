@@ -1,4 +1,4 @@
-package com.akr.leadIq.utility;
+package com.akr.imgur.utility;
 
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;

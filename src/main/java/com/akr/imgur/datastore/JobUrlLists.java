@@ -1,4 +1,4 @@
-package com.akr.leadIq.datastore;
+package com.akr.imgur.datastore;
 
 import java.util.concurrent.CopyOnWriteArrayList;
 

@@ -1,6 +1,6 @@
 package com.akr.leadiq.test;
 
-import com.akr.leadIq.datastore.JobUrlLists;
+import com.akr.imgur.datastore.JobUrlLists;
 import org.springframework.test.web.servlet.ResultMatcher;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;

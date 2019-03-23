@@ -1,10 +1,10 @@
-package com.akr.leadIq.controller;
+package com.akr.imgur.controller;
 
-import com.akr.leadIq.datastore.DatabaseMap;
-import com.akr.leadIq.domain.JobIdObject;
-import com.akr.leadIq.domain.JobStatusObject;
-import com.akr.leadIq.domain.UrlObject;
-import com.akr.leadIq.service.UrlUploadRequestService;
+import com.akr.imgur.datastore.DatabaseMap;
+import com.akr.imgur.domain.JobIdObject;
+import com.akr.imgur.domain.JobStatusObject;
+import com.akr.imgur.domain.UrlObject;
+import com.akr.imgur.service.UrlUploadRequestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

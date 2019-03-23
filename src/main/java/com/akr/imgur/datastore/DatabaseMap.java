@@ -1,11 +1,10 @@
-package com.akr.leadIq.datastore;
+package com.akr.imgur.datastore;
 
-import com.akr.leadIq.domain.JobStatusObject;
-import com.akr.leadIq.domain.LinkStatusObject;
-import com.akr.leadIq.domain.UrlObject;
-import com.akr.leadIq.service.UploadService;
-import com.akr.leadIq.utility.IdGenerator;
-import com.akr.leadIq.utility.TimeZone;
+import com.akr.imgur.domain.JobStatusObject;
+import com.akr.imgur.domain.LinkStatusObject;
+import com.akr.imgur.domain.UrlObject;
+import com.akr.imgur.utility.IdGenerator;
+import com.akr.imgur.utility.TimeZone;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

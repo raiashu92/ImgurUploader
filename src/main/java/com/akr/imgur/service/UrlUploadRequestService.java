@@ -1,9 +1,9 @@
-package com.akr.leadIq.service;
+package com.akr.imgur.service;
 
-import com.akr.leadIq.datastore.DatabaseMap;
-import com.akr.leadIq.datastore.JobUrlLists;
-import com.akr.leadIq.domain.JobIdObject;
-import com.akr.leadIq.domain.UrlObject;
+import com.akr.imgur.datastore.DatabaseMap;
+import com.akr.imgur.datastore.JobUrlLists;
+import com.akr.imgur.domain.JobIdObject;
+import com.akr.imgur.domain.UrlObject;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;

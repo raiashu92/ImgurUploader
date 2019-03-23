@@ -1,10 +1,10 @@
-package com.akr.leadIq.service;
+package com.akr.imgur.service;
 
-import com.akr.leadIq.datastore.JobUrlLists;
-import com.akr.leadIq.exception.UploadException;
-import com.akr.leadIq.utility.CustomResponseHandler;
-import com.akr.leadIq.utility.ResponseObject;
-import com.akr.leadIq.utility.TimeZone;
+import com.akr.imgur.datastore.JobUrlLists;
+import com.akr.imgur.exception.UploadException;
+import com.akr.imgur.utility.CustomResponseHandler;
+import com.akr.imgur.utility.ResponseObject;
+import com.akr.imgur.utility.TimeZone;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.entity.UrlEncodedFormEntity;

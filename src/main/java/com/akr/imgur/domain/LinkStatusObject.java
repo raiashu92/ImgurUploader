@@ -1,4 +1,4 @@
-package com.akr.leadIq.domain;
+package com.akr.imgur.domain;
 
 import java.util.List;
 //import java.util.concurrent.List;

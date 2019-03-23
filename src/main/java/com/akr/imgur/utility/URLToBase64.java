@@ -1,6 +1,6 @@
-package com.akr.leadIq.utility;
+package com.akr.imgur.utility;
 
-import com.akr.leadIq.exception.UploadException;
+import com.akr.imgur.exception.UploadException;
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
 

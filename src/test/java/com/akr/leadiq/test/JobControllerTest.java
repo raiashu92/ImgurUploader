@@ -1,8 +1,8 @@
 package com.akr.leadiq.test;
 
-import com.akr.leadIq.datastore.DatabaseMap;
-import com.akr.leadIq.datastore.JobUrlLists;
-import com.akr.leadIq.domain.UrlObject;
+import com.akr.imgur.datastore.DatabaseMap;
+import com.akr.imgur.datastore.JobUrlLists;
+import com.akr.imgur.domain.UrlObject;
 
 import org.junit.Assert;
 import org.junit.Before;

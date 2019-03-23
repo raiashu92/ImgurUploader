@@ -1,4 +1,4 @@
-package com.akr.leadIq.utility;
+package com.akr.imgur.utility;
 
 import org.apache.commons.io.Charsets;
 import org.apache.http.*;

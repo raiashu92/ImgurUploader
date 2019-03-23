@@ -1,4 +1,4 @@
-package com.akr.leadIq.utility;
+package com.akr.imgur.utility;
 
 public class ResponseObject {
     private String link;

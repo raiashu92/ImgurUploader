@@ -1,4 +1,4 @@
-package com.akr.leadIq.utility;
+package com.akr.imgur.utility;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;

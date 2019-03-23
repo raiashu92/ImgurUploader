@@ -1,4 +1,4 @@
-package com.akr.leadIq.domain;
+package com.akr.imgur.domain;
 
 public class JobIdObject {
     private String jobId;
